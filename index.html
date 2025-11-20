@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>U Suchý Dásně - Rocková hospoda</title>
+    <meta name="description" content="Legendární rocková hospoda v Praze 2. Stolní fotbálky, skvělé pivo a atmosféra od roku 1994.">
+    
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #d32f2f; /* Tmavší, sytá červená */
+            --accent: #ff5252; /* Světlejší červená pro hover */
+            --bg-dark: #1a1a1a;
+            --bg-card: #252525;
+            --text-main: #e0e0e0;
+            --text-muted: #a0a0a0;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.6;
+            background-image: linear-gradient(to bottom, #111, #1a1a1a); /* Jemný přechod */
+        }
+
+        h1, h2, h3, .nav-link, .cta-button {
+            font-family: 'Oswald', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* --- Header & Navigace --- */
+        header {
+            background: rgba(18, 18, 18, 0.95);
+            padding: 0.8rem 1rem;
+            position: sticky;
+            top: 0;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.6);
+            z-index: 100;
+            border-bottom: 2px solid var(--primary);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-decoration: none;
+        }
+
+        .logo-img {
+            height: 50px; /* Velikost loga */
+            width: auto;
+        }
+
+        .site-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #fff;
+            display: none; /* Na desktopu ukážeme i text, pokud logo nestačí */
+        }
+
+        @media (min-width: 768px) { .site-name { display: block; } }
+
+        .nav-links { display: none; }
+        @media (min-width: 768px) {
+            .nav-links { display: flex; gap: 30px; }
+        }
+
+        .nav-links a {
+            color: var(--text-main);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+            font-size: 1.1rem;
+        }
+
+        .nav-links a:hover { color: var(--accent); }
+
+        /* --- Hero Sekce --- */
+        .hero {
+            text-align: center;
+            padding: 120px 20px;
+            /* Tmavý overlay přes fotku, aby byl text čitelný */
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1575444758702-4a6b9222336e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+            background-size: cover;
+            background-position: center;
+            border-bottom: 1px solid #333;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+            color: #fff;
+            text-shadow: 2px 2px 4px #000;
+        }
+        
+        .hero p {
+            font-size: 1.3rem;
+            color: #ddd;
+            margin-bottom: 30px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 15px 40px;
+            border-radius: 2px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            border: 1px solid var(--primary);
+        }
+
+        .cta-button:hover {
+            background: transparent;
+            border-color: var(--accent);
+            color: var(--accent);
+            box-shadow: 0 0 15px rgba(255, 82, 82, 0.3);
+        }
+
+        /* --- Obsah --- */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        .grid-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-top: -80px; /* Efekt překrytí hero sekce */
+        }
+
+        .card {
+            background: var(--bg-card);
+            padding: 35px;
+            border-radius: 4px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            border-top: 4px solid var(--primary);
+            transition: transform 0.3s;
+        }
+
+        .card:hover { transform: translateY(-5px); }
+
+        h2 { 
+            color: var(--accent); 
+            margin-bottom: 25px; 
+            font-size: 1.8rem;
+            border-bottom: 1px solid #444;
+            padding-bottom: 10px;
+        }
+
+        /* Seznam piv */
+        .beer-list li {
+            list-style: none;
+            border-bottom: 1px solid #333;
+            padding: 12px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .beer-list li strong { color: #fff; font-size: 1.1rem; }
+        .beer-list li span { color: var(--text-muted); font-size: 0.9rem; }
+
+        /* Otevírací doba */
+        .hours-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 1px dotted #333;
+        }
+        .hours-row.today { color: var(--accent); font-weight: bold; }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 50px 20px;
+            background: #000;
+            margin-top: 50px;
+            color: #666;
+            border-top: 1px solid #333;
+        }
+        
+        /* Mapa placeholder styl */
+        .map-btn {
+            display: block;
+            width: 100%;
+            text-align: center;
+            background: #333;
+            color: #fff;
+            padding: 15px;
+            text-decoration: none;
+            margin-top: 20px;
+            border-radius: 4px;
+        }
+        .map-btn:hover { background: #444; }
+
+        /* Responsivita */
+        @media (max-width: 600px) {
+            .hero h1 { font-size: 2.5rem; }
+            .grid-info { margin-top: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <a href="#" class="logo-container">
+                <img src="logo.gif" alt="U Suchý Dásně" class="logo-img" onerror="this.style.display='none'">
+                <span class="site-name">U SUCHÝ DÁSNĚ</span>
+            </a>
+            <div class="nav-links">
+                <a href="#pivo">NA ČEPU</a>
+                <a href="#oteviracka">OTEVÍRAČKA</a>
+                <a href="#kontakt">KONTAKT</a>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1>ROCKOVÁ LEGENDA<br>V PRAZE</h1>
+        <p>Stolní fotbálky, promítací plátno, skvělé pivo a atmosféra, která nespí.</p>
+        <a href="#kontakt" class="cta-button">KDE NÁS NAJDETE</a>
+    </section>
+
+    <div class="container">
+        <div class="grid-info">
+            
+            <div class="card" id="pivo">
+                <h2>NA ČEPU</h2>
+                <ul class="beer-list">
+                    <li>
+                        <strong>Staropramen 10°, 12°</strong>
+                        <span>Klasika</span>
+                    </li>
+                    <li>
+                        <strong>Staropramen Granát</strong>
+                        <span>Polotmavé</span>
+                    </li>
+                    <li>
+                        <strong>Ostravar 14°</strong>
+                        <span>Speciál</span>
+                    </li>
+                    <li>
+                        <strong>Hoegaarden White</strong>
+                        <span>Pšeničné</span>
+                    </li>
+                </ul>
+                <p style="margin-top: 20px; font-style: italic; color: #888; font-size: 0.9rem;">+ široká nabídka panáků a nealko</p>
+            </div>
+
+            <div class="card" id="oteviracka">
+                <h2>OTEVÍRACÍ DOBA</h2>
+                <div class="hours-row">
+                    <span>Po - Pá</span>
+                    <strong>14:00 - 03:00</strong>
+                </div>
+                <div class="hours-row">
+                    <span>Sobota</span>
+                    <strong>16:00 - 03:00</strong>
+                </div>
+                <div class="hours-row">
+                    <span>Neděle</span>
+                    <strong>16:00 - 02:00</strong>
+                </div>
+                <div style="margin-top: 20px; background: #333; padding: 10px; border-radius: 4px; text-align: center;">
+                    <span style="color: #fff;">Happy Hours?</span> <br>
+                    <small>Sledujte nás na baru!</small>
+                </div>
+            </div>
+
+            <div class="card" id="kontakt">
+                <h2>KONTAKT</h2>
+                <p style="font-size: 1.2rem; margin-bottom: 10px; color: #fff;">Trojická 11, Praha 2</p>
+                <p style="margin-bottom: 15px;"><a href="tel:224919710" style="color:var(--accent); text-decoration: none;">224 919 710</a></p>
+                <p style="color: #888; font-size: 0.9rem;">MHD: Tram 18, 24 (Botanická zahrada)</p>
+                
+                <a href="https://maps.google.com/?q=U+Suchy+Dasne+Trojicka+11+Praha" target="_blank" class="map-btn">
+                    OTEVŘÍT MAPU
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2025 U Suchý Dásně | <a href="#" style="color: #666;">Facebook</a></p>
+    </footer>
+
+</body>
+</html>
