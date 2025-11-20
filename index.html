@@ -14,12 +14,13 @@
 
     <style>
         :root {
-            --primary: #d32f2f; /* Tmavší, sytá červená */
-            --accent: #ff5252; /* Světlejší červená pro hover */
+            --primary: #d32f2f;
+            --accent: #ff5252;
             --bg-dark: #1a1a1a;
             --bg-card: #252525;
             --text-main: #e0e0e0;
             --text-muted: #a0a0a0;
+            --facebook: #1877F2; /* Barva Facebooku */
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -30,7 +31,7 @@
             background-color: var(--bg-dark);
             color: var(--text-main);
             line-height: 1.6;
-            background-image: linear-gradient(to bottom, #111, #1a1a1a); /* Jemný přechod */
+            background-image: linear-gradient(to bottom, #111, #1a1a1a);
         }
 
         h1, h2, h3, .nav-link, .cta-button {
@@ -66,7 +67,7 @@
         }
 
         .logo-img {
-            height: 50px; /* Velikost loga */
+            height: 50px;
             width: auto;
         }
 
@@ -74,7 +75,7 @@
             font-size: 1.5rem;
             font-weight: 700;
             color: #fff;
-            display: none; /* Na desktopu ukážeme i text, pokud logo nestačí */
+            display: none;
         }
 
         @media (min-width: 768px) { .site-name { display: block; } }
@@ -98,7 +99,6 @@
         .hero {
             text-align: center;
             padding: 120px 20px;
-            /* Tmavý overlay přes fotku, aby byl text čitelný */
             background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1575444758702-4a6b9222336e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
             background-size: cover;
             background-position: center;
@@ -152,7 +152,7 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 30px;
-            margin-top: -80px; /* Efekt překrytí hero sekce */
+            margin-top: -80px;
         }
 
         .card {
@@ -162,6 +162,8 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
             border-top: 4px solid var(--primary);
             transition: transform 0.3s;
+            display: flex;
+            flex-direction: column;
         }
 
         .card:hover { transform: translateY(-5px); }
@@ -196,6 +198,32 @@
         }
         .hours-row.today { color: var(--accent); font-weight: bold; }
 
+        /* Tlačítka v kontaktu */
+        .action-btn {
+            display: block;
+            width: 100%;
+            text-align: center;
+            padding: 12px;
+            text-decoration: none;
+            margin-top: 15px;
+            border-radius: 4px;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        .map-btn {
+            background: #333;
+            color: #fff;
+        }
+        .map-btn:hover { background: #444; }
+
+        .fb-btn {
+            background: var(--facebook);
+            color: white;
+            font-size: 0.95rem;
+        }
+        .fb-btn:hover { background: #1565c0; }
+
         /* Footer */
         footer {
             text-align: center;
@@ -205,20 +233,9 @@
             color: #666;
             border-top: 1px solid #333;
         }
-        
-        /* Mapa placeholder styl */
-        .map-btn {
-            display: block;
-            width: 100%;
-            text-align: center;
-            background: #333;
-            color: #fff;
-            padding: 15px;
-            text-decoration: none;
-            margin-top: 20px;
-            border-radius: 4px;
-        }
-        .map-btn:hover { background: #444; }
+
+        footer a { color: #888; text-decoration: none; transition: color 0.3s; }
+        footer a:hover { color: var(--primary); }
 
         /* Responsivita */
         @media (max-width: 600px) {
@@ -256,23 +273,19 @@
                 <h2>NA ČEPU</h2>
                 <ul class="beer-list">
                     <li>
-                        <strong>Staropramen 10°, 12°</strong>
-                        <span>Klasika</span>
+                        <strong>Radek 10°</strong>
+                        <span>Světlé</span>
                     </li>
                     <li>
-                        <strong>Staropramen Granát</strong>
-                        <span>Polotmavé</span>
+                        <strong>Plzeň</strong>
+                        <span>Světlé</span>
                     </li>
                     <li>
-                        <strong>Ostravar 14°</strong>
-                        <span>Speciál</span>
-                    </li>
-                    <li>
-                        <strong>Hoegaarden White</strong>
-                        <span>Pšeničné</span>
+                        <strong>Birell</strong>
+                        <span>Nealko</span>
                     </li>
                 </ul>
-                <p style="margin-top: 20px; font-style: italic; color: #888; font-size: 0.9rem;">+ široká nabídka panáků a nealko</p>
+                <p style="margin-top: auto; padding-top: 20px; font-style: italic; color: #888; font-size: 0.9rem;">+ široká nabídka panáků a nealko</p>
             </div>
 
             <div class="card" id="oteviracka">
@@ -289,9 +302,8 @@
                     <span>Neděle</span>
                     <strong>16:00 - 02:00</strong>
                 </div>
-                <div style="margin-top: 20px; background: #333; padding: 10px; border-radius: 4px; text-align: center;">
-                    <span style="color: #fff;">Happy Hours?</span> <br>
-                    <small>Sledujte nás na baru!</small>
+                <div style="margin-top: auto; padding-top: 20px; text-align: center;">
+                    <small style="color:#888;">Happy Hours? Sledujte nás na baru!</small>
                 </div>
             </div>
 
@@ -299,9 +311,13 @@
                 <h2>KONTAKT</h2>
                 <p style="font-size: 1.2rem; margin-bottom: 10px; color: #fff;">Trojická 11, Praha 2</p>
                 <p style="margin-bottom: 15px;"><a href="tel:224919710" style="color:var(--accent); text-decoration: none;">224 919 710</a></p>
-                <p style="color: #888; font-size: 0.9rem;">MHD: Tram 18, 24 (Botanická zahrada)</p>
+                <p style="color: #888; font-size: 0.9rem; margin-bottom: 20px;">MHD: Metro/tram Palackého náměstí, nebo tram Botanická zahrada</p>
                 
-                <a href="https://maps.google.com/?q=U+Suchy+Dasne+Trojicka+11+Praha" target="_blank" class="map-btn">
+                <a href="https://www.facebook.com/profile.php?id=100064193341935" target="_blank" class="action-btn fb-btn">
+                    SLEDOVAT AKTUALITY NA FB
+                </a>
+
+                <a href="https://maps.google.com/?q=U+Suchý+Dásně+Praha" target="_blank" class="action-btn map-btn">
                     OTEVŘÍT MAPU
                 </a>
             </div>
@@ -309,7 +325,7 @@
     </div>
 
     <footer>
-        <p>© 2025 U Suchý Dásně | <a href="#" style="color: #666;">Facebook</a></p>
+        <p>© 2025 U Suchý Dásně | <a href="https://www.facebook.com/profile.php?id=100064193341935" target="_blank">Facebook</a></p>
     </footer>
 
 </body>
